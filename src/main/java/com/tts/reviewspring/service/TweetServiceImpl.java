@@ -15,6 +15,7 @@ public class TweetServiceImpl implements TweetService {
     private TweetRepository tweetRepository;
 
     public TweetServiceImpl(TweetRepository tweetRepository) {
+
         this.tweetRepository = tweetRepository;
     }
 
