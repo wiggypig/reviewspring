@@ -22,23 +22,41 @@ public class UserController {
     private TweetService tweetService;
 
     @GetMapping(value = "/users/{username}")
-    public String getUser(@PathVariable("username") String username, Model model ) {
-
-        // find user
+    public String getUser(@PathVariable(value = "username") String username, Model model) {
+/*        // find user
         User user = userService.findByUsername(username);
 
         // find tweet from the user
         List<Tweet> tweets = tweetService.findAllByUser(user);
 
+
         model.addAttribute("user", user);
         model.addAttribute("tweetList", tweets);
 
         return "user";
-    }
+    }*/
+            // find user
+            User loggedInUser = userService.getLoggedInUser();
+            User user = userService.findByUsername(username);
+            // find tweet from user
+            List<Tweet> tweets = tweetService.findAllByUser(user);
+            List<User> following = loggedInUser.getFollowing();
+            boolean isFollowing = false;
+            for (User followedUser : following) {
+                if (followedUser.getUsername().equals(username)) {
+                    isFollowing = true;
+                }
+            }
+            // add tweets for user
+            model.addAttribute("following", isFollowing);
+            model.addAttribute("tweetList", tweets);
+            model.addAttribute("user", user);
+            // return user object
+            return "user";
+        }
 
     @GetMapping(value = "/users")
     public String getUsers(Model model){
-
         List<User> users = userService.findAll();
         model.addAttribute("users", users);
         setTweetCounts(users, model);
