@@ -2,16 +2,17 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head>
     <title>Feed</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<!--    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css">
-<!--    <link rel="stylesheet" href="/custom.css">-->
+&lt;!&ndash;    <link rel="stylesheet" href="/custom.css">&ndash;&gt;
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<!--    <script src="/custom.js"></script>-->
+&lt;!&ndash;    <script src="/custom.js"></script>&ndash;&gt;-->
+
 </head>
 
 <body>
-
+<div th:replace="fragments/navbar"></div>
 <div class="container">
     <h2>Tweets</h2>
     <div th:each="tweet:${tweetList}">

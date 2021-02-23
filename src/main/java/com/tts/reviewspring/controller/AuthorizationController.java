@@ -51,11 +51,11 @@ public class AuthorizationController {
         return "registration";
     }
 
-    /*@RequestMapping(value="/login", method= RequestMethod.GET)
+    @RequestMapping(value="/login", method= RequestMethod.GET)
     public String login(User user, Model model){
-        userService.findByUsername(username);
-        model.getAttribute()
-        return "login";}*/
+//        userService.findByUsername(username);
+//        model.getAttribute()
+        return "login";}
 
 
 }
