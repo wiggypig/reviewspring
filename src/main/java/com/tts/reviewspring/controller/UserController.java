@@ -23,21 +23,20 @@ public class UserController {
 
     @GetMapping(value = "/users/{username}")
     public String getUser(@PathVariable(value = "username") String username, Model model) {
-/*        // find user
+       // find user
         User user = userService.findByUsername(username);
-
+/*
         // find tweet from the user
         List<Tweet> tweets = tweetService.findAllByUser(user);
-
 
         model.addAttribute("user", user);
         model.addAttribute("tweetList", tweets);
 
-        return "user";
     }*/
+
             // find user
             User loggedInUser = userService.getLoggedInUser();
-            User user = userService.findByUsername(username);
+//            User user = userService.findByUsername(username);
             // find tweet from user
             List<Tweet> tweets = tweetService.findAllByUser(user);
             List<User> following = loggedInUser.getFollowing();
@@ -47,10 +46,14 @@ public class UserController {
                     isFollowing = true;
                 }
             }
+            // check if the profile page belongs to the current user
+            boolean isSelfPage = loggedInUser.getUsername().equals(username);
+
             // add tweets for user
-            model.addAttribute("following", isFollowing);
             model.addAttribute("tweetList", tweets);
             model.addAttribute("user", user);
+            model.addAttribute("following", isFollowing);
+            model.addAttribute("isSelfPage", isSelfPage);
             // return user object
             return "user";
         }
@@ -60,6 +63,9 @@ public class UserController {
         List<User> users = userService.findAll();
         model.addAttribute("users", users);
         setTweetCounts(users, model);
+        User loggedInUser = userService.getLoggedInUser();
+        List<User> usersFollowing = loggedInUser.getFollowing();
+        setFollowingStatus(users, usersFollowing, model);
         return "users";
     }
 
@@ -70,6 +76,21 @@ public class UserController {
             tweetCounts.put(user.getUsername(), tweets.size());
         }
         model.addAttribute("tweetCounts", tweetCounts);
+    }
+
+    // possible stalker method
+    private void setFollowingStatus(List<User> users, List<User> usersFollowing, Model model) {
+        HashMap<String, Boolean> followingStatus = new HashMap<>();
+        String username = userService.getLoggedInUser().getUsername();
+        // check if each user is being followed
+        for (User user : users) {
+            if(usersFollowing.contains(user)) {
+                followingStatus.put(user.getUsername(), true);
+            }else if (!user.getUsername().equals(username)) {
+                followingStatus.put(user.getUsername(), false);
+            }
+        }
+        model.addAttribute("followingStatus", followingStatus);
     }
 
 }

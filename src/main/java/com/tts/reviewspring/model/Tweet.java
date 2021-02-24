@@ -12,6 +12,7 @@ import org.hibernate.validator.constraints.Length;
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import java.util.Date;
+import java.util.List;
 
 @Data
 @Builder
@@ -35,5 +36,55 @@ public class Tweet {
 
     @CreationTimestamp
     private Date createdAt;
+
+    @ManyToMany(fetch = FetchType.LAZY, cascade = { CascadeType.PERSIST, CascadeType.MERGE })
+    @JoinTable(name = "tweet_tag", joinColumns = @JoinColumn(name = "tweet_id"),
+            inverseJoinColumns = @JoinColumn(name = "tag_id"))
+    private List<Tag> tags;
+
+    // Use the code below if your lombok is not working:
+    // public Long getId() {
+    // return id;
+    // }
+
+    // public User getUser() {
+    // return user;
+    // }
+
+    // public void setUser(User user) {
+    // this.user = user;
+    // }
+
+    // public List<Tag> getTags() {
+    // return tags;
+    // }
+
+    // public void setTags(List<Tag> tags) {
+    // this.tags = tags;
+    // }
+
+    // public String getMessage() {
+    // return message;
+    // }
+
+    // public void setMessage(String message) {
+    // this.message = message;
+    // }
+
+    // public Date getCreatedAt() {
+    // return createdAt;
+    // }
+
+    // public void setCreatedAt(Date createdAt) {
+    // this.createdAt = createdAt;
+    // }
+
+    // @Override
+    // public String toString() {
+    // return "Tweet [createdAt=" + createdAt + ", id=" + id + ", message=" +
+    // message + ", tags=" + tags
+    // + ", user=" + user + "]";
+    // }
+
 
 }
