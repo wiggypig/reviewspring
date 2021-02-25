@@ -5,6 +5,7 @@
     <title>Log in</title>
     <div th:replace="/fragments/header :: header"></div>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="/custom.js"></script>
 </head>
 
 <body>
@@ -21,6 +22,10 @@
         </div>
         <button class="btn btn-md btn-success btn-block" name="Submit" value="Login" type="Submit">Log in</button>
     </form>
+    <form th:action="@{/signup}" method="post"><br/>
+        <button class="btn btn-md btn-success btn-block" name="Submit" value="Submit" type="Submit">Sign up</button>
+    </form>
+
 </div>
 <div th:replace = "/fragments/footer :: scripts"></div>
 <div th:replace = "/fragments/footer :: copy"></div>

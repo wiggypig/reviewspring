@@ -5,14 +5,23 @@
     <title id="title">Users</title>
     <div th:replace="/fragments/header :: header"></div>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="/custom.js"></script>
 </head>
 
 <body>
-<div class="container-fluid">
     <div class="container">
         <div th:replace="fragments/navbar"/>
     </div>
-<div class="container">
+    <ul class="nav nav-tabs">
+        <li role="presentation" th:classappend="${filter == 'all' ? 'active' : '' }">
+            <a href="/users">All</a></li>
+        <li role="presentation" th:classappend="${filter == 'followers' ? 'active' : '' }">
+            <a href="/users?filter=followers">Followers</a></li>
+        <li role="presentation" th:classappend="${filter == 'following' ? 'active' : '' }">
+            <a href="/users?filter=following">Following</a></li>
+    </ul><br/>
+
+    <div class="container">
     <h2>Users</h2>
     <div class="list-group" th:each="user : ${users}">
 
@@ -43,10 +52,12 @@
         </a>
     </div>
 </div>
-</div>
+    <div th:if="${#lists.isEmpty(users) and filter == 'followers'}"><center><h3>You don't have any followers</h3></center></div>
+    <div th:if="${#lists.isEmpty(users) and filter == 'following'}"><center><h3>You're not following anyone</h3></center></div>
 
 
 <div th:replace = "/fragments/footer :: scripts"></div>
 <div th:replace = "/fragments/footer :: copy"></div>
+    <script src="/custom.js"></script>
 </body>
 </html>a
