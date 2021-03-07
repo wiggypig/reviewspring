@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+    <meta charset="UTF-8">
+    <title id="title">Error 403</title>
+    <div th:replace="/fragments/header :: header"></div>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="/custom.js"></script>
+</head>
+<body>
+<div class="container-fluid">
+    <h1>Something went wrong! </h1>
+    <h2>Our Engineers have been notified and are on it</h2>
+    <h3 align="center"> Error Code: 403 </h3>
+    <h6 align="center">Remember our engineers are cats ... </h6>
+</div>
+    <a href="/">Go Home</a>
+    <div th:replace = "/fragments/footer :: scripts"></div>
+    <div th:replace = "/fragments/footer :: copy"></div>
+</body>
+</html>
